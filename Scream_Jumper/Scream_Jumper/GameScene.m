@@ -55,7 +55,7 @@ static const uint32_t worldCategory = 1 << 1;
     
     
     //Create Ground
-    SKTexture* groundTexture = [SKTexture textureWithImageNamed:@"Ground1"];
+    SKTexture* groundTexture = [SKTexture textureWithImageNamed:@"Rest2"];
     groundTexture.filteringMode = SKTextureFilteringNearest;
     
     SKAction* moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:0.02 * groundTexture.size.width*2];
@@ -63,14 +63,28 @@ static const uint32_t worldCategory = 1 << 1;
     SKAction* moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
     for( int i = 0; i < 2 + self.frame.size.width / ( groundTexture.size.width * 2 ); ++i ) {
         SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
-        [sprite setScale:2.0];
-        sprite.position = CGPointMake(i * sprite.size.width, -600);
+        [sprite setScale:3.0];
+        sprite.position = CGPointMake(i * sprite.size.width, -500);
         [sprite runAction:moveGroundSpritesForever];
         [self addChild:sprite];
     }
     
+    // Create skyline
+    SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"background"];
+    skylineTexture.filteringMode = SKTextureFilteringNearest;
     
+    SKAction* moveSkylineSprite = [SKAction moveByX:-skylineTexture.size.width*2 y:0 duration:0.1 * skylineTexture.size.width*2];
+    SKAction* resetSkylineSprite = [SKAction moveByX:skylineTexture.size.width*2 y:0 duration:0];
+    SKAction* moveSkylineSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveSkylineSprite, resetSkylineSprite]]];
     
+    for( int i = 0; i < 2 + self.frame.size.width / ( skylineTexture.size.width * 2 ); ++i ) {
+        SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:skylineTexture];
+        [sprite setScale:7.0];
+        sprite.zPosition = -20;
+        sprite.position = CGPointMake(i * sprite.size.width, 100);
+        [sprite runAction:moveSkylineSpritesForever];
+        [self addChild:sprite];
+    }
     // Initialize update time
     _lastUpdateTime = 0;
     
@@ -104,7 +118,7 @@ static const uint32_t worldCategory = 1 << 1;
     
 
     _musicNote = [SKSpriteNode spriteNodeWithTexture:noteTexture];
-    [_musicNote setScale:0.2];
+    [_musicNote setScale:0.4];
     _musicNote.position = CGPointMake(self.frame.size.width / 20, CGRectGetMidY(self.frame));
     _musicNote.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:_musicNote.size.height / 2];
     _musicNote.physicsBody.dynamic = YES;
@@ -113,7 +127,7 @@ static const uint32_t worldCategory = 1 << 1;
     [self addChild:_musicNote];
     
     SKNode* dummy = [SKNode node];
-    dummy.position = CGPointMake(0, -650);
+    dummy.position = CGPointMake(0, -500);
     dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, 200)];
     dummy.physicsBody.dynamic = NO;
     [self addChild:dummy];
@@ -157,6 +171,15 @@ static const uint32_t worldCategory = 1 << 1;
 //    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
 
+CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
+    if( value > max ) {
+        return max;
+    } else if( value < min ) {
+        return min;
+    } else {
+        return value;
+    }
+}
 
 -(void)update:(CFTimeInterval)currentTime {
     // Called before each frame is rendered
@@ -175,6 +198,7 @@ static const uint32_t worldCategory = 1 << 1;
     }
     
     _lastUpdateTime = currentTime;
+    _musicNote.zRotation = clamp( -1, 0.5, _musicNote.physicsBody.velocity.dy * ( _musicNote.physicsBody.velocity.dy < 0 ? 0.003 : 0.001 ) );
 }
 
 @end
