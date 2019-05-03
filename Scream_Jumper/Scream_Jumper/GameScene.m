@@ -13,9 +13,43 @@
     SKShapeNode *_spinnyNode;
     SKLabelNode *_label;
 }
+@synthesize audioEngine;
 
 - (void)sceneDidLoad {
     // Setup your scene here
+    audioEngine = [[AVAudioEngine alloc] init];
+    AudioStreamBasicDescription audioDescription = {
+        .mFormatID          = kAudioFormatLinearPCM,
+        .mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
+        .mChannelsPerFrame  = 2,
+        .mBytesPerPacket    = sizeof(float),
+        .mFramesPerPacket   = 1,
+        .mBytesPerFrame     = sizeof(float),
+        .mBitsPerChannel    = 8 * sizeof(float),
+        .mSampleRate        = 44100.0
+    };
+    AVAudioFormat *fmt = [[AVAudioFormat alloc] initWithStreamDescription:&audioDescription];
+    
+    AVAudioInputNode *input = [audioEngine inputNode];
+    [input installTapOnBus:0 bufferSize:1024 format:fmt block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
+        float v = 0;
+        const AudioBufferList *bufferList = [buffer audioBufferList];
+        float *rawData = (float *) bufferList->mBuffers[0].mData;
+        for (int i = 0; i < [buffer frameLength]; ++i)
+        {
+            v += fabsf(rawData[i]);
+        }
+        NSLog(@"V: %f\n", v);
+    }];
+    
+    NSError *err;
+    [audioEngine startAndReturnError:&err];
+    
+    
+    
+    
+    
+    
     
     // Initialize update time
     _lastUpdateTime = 0;
