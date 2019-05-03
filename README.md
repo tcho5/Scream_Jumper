@@ -10,4 +10,4 @@ The goal of this game is to get past the obstacles using just your voice and eye
 2) Sound effects for jumping and dying  
 3) Score text that keeps track of scores  
 4) Different difficulties?  
-5) Ability to change the objects that jumps  
+5) Ability to change the objects that jumps (Collectables)

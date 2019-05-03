@@ -1,0 +1,17 @@
+commit 4a00965814df4da0f54ed53a5d49ab2058484137
+Author: Taehyun Cho <tcho5@binghamton.edu>
+Date:   Mon Apr 29 15:07:51 2019 -0400
+
+    Update README.md
+
+commit 2a86075153c64fff27c6388053f3714f78ce84c9
+Author: Taehyun Cho <taehyuncho@Taehyuns-MacBook-Air.local>
+Date:   Mon Apr 29 15:00:27 2019 -0400
+
+    Changed Readme
+
+commit 7605c90b0787b0b5de8a3e7f95ef2fddb4f0165d
+Author: Taehyun Cho <tcho5@binghamton.edu>
+Date:   Mon Apr 29 14:51:40 2019 -0400
+
+    Initial commit
