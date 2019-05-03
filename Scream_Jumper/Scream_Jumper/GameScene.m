@@ -12,11 +12,19 @@
     NSTimeInterval _lastUpdateTime;
     SKShapeNode *_spinnyNode;
     SKLabelNode *_label;
+    SKSpriteNode *_musicNote;
 }
+
 @synthesize audioEngine;
+static const uint32_t worldCategory = 1 << 1;
+
+
 
 - (void)sceneDidLoad {
     // Setup your scene here
+    self.backgroundColor = UIColor.whiteColor;
+
+    
     audioEngine = [[AVAudioEngine alloc] init];
     AudioStreamBasicDescription audioDescription = {
         .mFormatID          = kAudioFormatLinearPCM,
@@ -46,32 +54,69 @@
     [audioEngine startAndReturnError:&err];
     
     
+    //Create Ground
+    SKTexture* groundTexture = [SKTexture textureWithImageNamed:@"Ground1"];
+    groundTexture.filteringMode = SKTextureFilteringNearest;
     
-    
+    SKAction* moveGroundSprite = [SKAction moveByX:-groundTexture.size.width*2 y:0 duration:0.02 * groundTexture.size.width*2];
+    SKAction* resetGroundSprite = [SKAction moveByX:groundTexture.size.width*2 y:0 duration:0];
+    SKAction* moveGroundSpritesForever = [SKAction repeatActionForever:[SKAction sequence:@[moveGroundSprite, resetGroundSprite]]];
+    for( int i = 0; i < 2 + self.frame.size.width / ( groundTexture.size.width * 2 ); ++i ) {
+        SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:groundTexture];
+        [sprite setScale:2.0];
+        sprite.position = CGPointMake(i * sprite.size.width, -600);
+        [sprite runAction:moveGroundSpritesForever];
+        [self addChild:sprite];
+    }
     
     
     
     // Initialize update time
     _lastUpdateTime = 0;
     
-    // Get label node from scene and store it for use later
-    _label = (SKLabelNode *)[self childNodeWithName:@"//helloLabel"];
+//    // Get label node from scene and store it for use later
+//    _label = (SKLabelNode *)[self childNodeWithName:@"//helloLabel"];
+//
+//    _label.alpha = 0.0;
+//    [_label runAction:[SKAction fadeInWithDuration:2.0]];
+//
+//    CGFloat w = (self.size.width + self.size.height) * 0.05;
+//
+//    // Create shape node to use during mouse interaction
+//    _spinnyNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w, w) cornerRadius:w * 0.3];
+//    _spinnyNode.lineWidth = 2.5;
+//
+//    [_spinnyNode runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:M_PI duration:1]]];
+//    [_spinnyNode runAction:[SKAction sequence:@[
+//                                                [SKAction waitForDuration:0.5],
+//                                                [SKAction fadeOutWithDuration:0.5],
+//                                                [SKAction removeFromParent],
+//                                                ]]];
+    self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 );
+    self.physicsWorld.contactDelegate = self;
     
-    _label.alpha = 0.0;
-    [_label runAction:[SKAction fadeInWithDuration:2.0]];
+    SKTexture* noteTexture = [SKTexture textureWithImageNamed:@"musicNote"];
+    noteTexture.filteringMode = SKTextureFilteringNearest;
+    SKTexture* noteTexture2 = [SKTexture textureWithImageNamed:@"musicNote2"];
+    noteTexture2.filteringMode = SKTextureFilteringNearest;
+    SKAction* flap = [SKAction repeatActionForever:[SKAction animateWithTextures:@[noteTexture, noteTexture2] timePerFrame:0.5]];
+
     
-    CGFloat w = (self.size.width + self.size.height) * 0.05;
+
+    _musicNote = [SKSpriteNode spriteNodeWithTexture:noteTexture];
+    [_musicNote setScale:0.2];
+    _musicNote.position = CGPointMake(self.frame.size.width / 20, CGRectGetMidY(self.frame));
+    _musicNote.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:_musicNote.size.height / 2];
+    _musicNote.physicsBody.dynamic = YES;
+    _musicNote.physicsBody.allowsRotation = NO;
+    //[_musicNote runAction:flap];
+    [self addChild:_musicNote];
     
-    // Create shape node to use during mouse interaction
-    _spinnyNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w, w) cornerRadius:w * 0.3];
-    _spinnyNode.lineWidth = 2.5;
-    
-    [_spinnyNode runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:M_PI duration:1]]];
-    [_spinnyNode runAction:[SKAction sequence:@[
-                                                [SKAction waitForDuration:0.5],
-                                                [SKAction fadeOutWithDuration:0.5],
-                                                [SKAction removeFromParent],
-                                                ]]];
+    SKNode* dummy = [SKNode node];
+    dummy.position = CGPointMake(0, -650);
+    dummy.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, 200)];
+    dummy.physicsBody.dynamic = NO;
+    [self addChild:dummy];
 }
 
 
@@ -98,18 +143,18 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     // Run 'Pulse' action from 'Actions.sks'
-    [_label runAction:[SKAction actionNamed:@"Pulse"] withKey:@"fadeInOut"];
-    
-    for (UITouch *t in touches) {[self touchDownAtPoint:[t locationInNode:self]];}
+//    [_label runAction:[SKAction actionNamed:@"Pulse"] withKey:@"fadeInOut"];
+//
+//    for (UITouch *t in touches) {[self touchDownAtPoint:[t locationInNode:self]];}
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    for (UITouch *t in touches) {[self touchMovedToPoint:[t locationInNode:self]];}
+//    for (UITouch *t in touches) {[self touchMovedToPoint:[t locationInNode:self]];}
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
+//    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
+//    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
 
 

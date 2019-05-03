@@ -16,6 +16,9 @@
 		BC537E76227C9E67002624C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC537E75227C9E67002624C5 /* Assets.xcassets */; };
 		BC537E79227C9E67002624C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC537E77227C9E67002624C5 /* LaunchScreen.storyboard */; };
 		BC537E7C227C9E67002624C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537E7B227C9E67002624C5 /* main.m */; };
+		BC537E89227CAE89002624C5 /* musicNote.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E88227CAE89002624C5 /* musicNote.png */; };
+		BC537E8B227CAEA9002624C5 /* musicNote2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E8A227CAEA8002624C5 /* musicNote2.png */; };
+		BC537E8D227CB085002624C5 /* Ground1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E8C227CB085002624C5 /* Ground1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		BC537E78227C9E67002624C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC537E7A227C9E67002624C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC537E7B227C9E67002624C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BC537E88227CAE89002624C5 /* musicNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicNote.png; sourceTree = "<group>"; };
+		BC537E8A227CAEA8002624C5 /* musicNote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicNote2.png; sourceTree = "<group>"; };
+		BC537E8C227CB085002624C5 /* Ground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,9 @@
 		BC537E64227C9E65002624C5 /* Scream_Jumper */ = {
 			isa = PBXGroup;
 			children = (
+				BC537E8C227CB085002624C5 /* Ground1.png */,
+				BC537E88227CAE89002624C5 /* musicNote.png */,
+				BC537E8A227CAEA8002624C5 /* musicNote2.png */,
 				BC537E65227C9E65002624C5 /* AppDelegate.h */,
 				BC537E66227C9E65002624C5 /* AppDelegate.m */,
 				BC537E68227C9E65002624C5 /* GameScene.sks */,
@@ -140,9 +149,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC537E74227C9E65002624C5 /* Main.storyboard in Resources */,
+				BC537E89227CAE89002624C5 /* musicNote.png in Resources */,
 				BC537E69227C9E65002624C5 /* GameScene.sks in Resources */,
+				BC537E8B227CAEA9002624C5 /* musicNote2.png in Resources */,
 				BC537E76227C9E67002624C5 /* Assets.xcassets in Resources */,
 				BC537E79227C9E67002624C5 /* LaunchScreen.storyboard in Resources */,
+				BC537E8D227CB085002624C5 /* Ground1.png in Resources */,
 				BC537E6B227C9E65002624C5 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
