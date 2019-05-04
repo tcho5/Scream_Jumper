@@ -13,6 +13,9 @@
 		BC435A4C227CD0E5001B3B47 /* obstacle2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A4B227CD0E5001B3B47 /* obstacle2.png */; };
 		BC435A4E227D80F5001B3B47 /* MenuScene in Resources */ = {isa = PBXBuildFile; fileRef = BC435A4D227D80F5001B3B47 /* MenuScene */; };
 		BC435A50227D812F001B3B47 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BC435A4F227D812F001B3B47 /* MenuScene.m */; };
+		BC435A53227E20E9001B3B47 /* obstacle3.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A52227E20E9001B3B47 /* obstacle3.png */; };
+		BC435A55227E20F0001B3B47 /* obstacle4.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A54227E20F0001B3B47 /* obstacle4.png */; };
+		BC435A57227E3434001B3B47 /* restartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A56227E3433001B3B47 /* restartButton.png */; };
 		BC537E67227C9E65002624C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537E66227C9E65002624C5 /* AppDelegate.m */; };
 		BC537E69227C9E65002624C5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BC537E68227C9E65002624C5 /* GameScene.sks */; };
 		BC537E6B227C9E65002624C5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = BC537E6A227C9E65002624C5 /* Actions.sks */; };
@@ -35,6 +38,9 @@
 		BC435A4D227D80F5001B3B47 /* MenuScene */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MenuScene; sourceTree = "<group>"; };
 		BC435A4F227D812F001B3B47 /* MenuScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		BC435A51227D8225001B3B47 /* MenuScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		BC435A52227E20E9001B3B47 /* obstacle3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obstacle3.png; sourceTree = "<group>"; };
+		BC435A54227E20F0001B3B47 /* obstacle4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obstacle4.png; sourceTree = "<group>"; };
+		BC435A56227E3433001B3B47 /* restartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restartButton.png; sourceTree = "<group>"; };
 		BC537E62227C9E65002624C5 /* Scream_Jumper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scream_Jumper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC537E65227C9E65002624C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC537E66227C9E65002624C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -84,8 +90,11 @@
 		BC537E64227C9E65002624C5 /* Scream_Jumper */ = {
 			isa = PBXGroup;
 			children = (
+				BC435A56227E3433001B3B47 /* restartButton.png */,
 				BC435A4B227CD0E5001B3B47 /* obstacle2.png */,
 				BC435A49227CD0DE001B3B47 /* obstacle1.png */,
+				BC435A52227E20E9001B3B47 /* obstacle3.png */,
+				BC435A54227E20F0001B3B47 /* obstacle4.png */,
 				BC435A3F227CBE81001B3B47 /* Rest2.png */,
 				BC537E8E227CBA65002624C5 /* background.png */,
 				BC435A3D227CBD73001B3B47 /* Rest1.png */,
@@ -173,9 +182,12 @@
 				BC537E89227CAE89002624C5 /* musicNote.png in Resources */,
 				BC537E69227C9E65002624C5 /* GameScene.sks in Resources */,
 				BC537E8B227CAEA9002624C5 /* musicNote2.png in Resources */,
+				BC435A57227E3434001B3B47 /* restartButton.png in Resources */,
+				BC435A55227E20F0001B3B47 /* obstacle4.png in Resources */,
 				BC537E76227C9E67002624C5 /* Assets.xcassets in Resources */,
 				BC435A4E227D80F5001B3B47 /* MenuScene in Resources */,
 				BC435A4A227CD0DE001B3B47 /* obstacle1.png in Resources */,
+				BC435A53227E20E9001B3B47 /* obstacle3.png in Resources */,
 				BC537E79227C9E67002624C5 /* LaunchScreen.storyboard in Resources */,
 				BC435A3E227CBD74001B3B47 /* Rest1.png in Resources */,
 				BC537E8F227CBA65002624C5 /* background.png in Resources */,

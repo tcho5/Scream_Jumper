@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuScene.h"
+#import "GameScene.h"
 
 @implementation MenuScene {
 SKLabelNode *_label;
@@ -32,7 +33,11 @@ SKLabelNode *_label;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
+    GameScene *gameScene = [[GameScene alloc] init];
+    gameScene.scaleMode = SKSceneScaleModeAspectFill;
+    [self.scene.view presentScene:gameScene
+                       transition:[SKTransition fadeWithColor:[SKColor blackColor]
+                                                     duration:2.0]];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     //    for (UITouch *t in touches) {[self touchMovedToPoint:[t locationInNode:self]];}

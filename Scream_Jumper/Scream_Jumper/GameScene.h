@@ -16,5 +16,8 @@
 @property (nonatomic) NSMutableArray<GKEntity *> *entities;
 @property (nonatomic) NSMutableDictionary<NSString*, GKGraph *> *graphs;
 @property (nonatomic, strong) AVAudioEngine *audioEngine;
+//@property(nonatomic,retain) IBOutlet UIButton* button1;
+
+//-(IBAction)buttonTouch:(id)sender ;
 
 @end

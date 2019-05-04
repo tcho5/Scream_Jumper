@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "MenuScene.h"
 
 @implementation GameScene {
     NSTimeInterval _lastUpdateTime;
@@ -21,9 +22,11 @@
     SKLabelNode* _highScoreLabelNode;
     NSInteger _highScore;
     SKAction* _moveAndRemoveRests;
+    SKNode* restartNode;
 }
 
 @synthesize audioEngine;
+
 static const uint32_t worldCategory = 1 << 1;
 static const uint32_t musicNoteCategory = 1 << 0;
 static const uint32_t restNoteCategory = 1 << 2;
@@ -32,7 +35,6 @@ static const uint32_t scoreCategory = 1 << 3;
 
 - (void)sceneDidLoad {
     // Setup your scene here
-    
     audioEngine = [[AVAudioEngine alloc] init];
     AudioStreamBasicDescription audioDescription = {
         .mFormatID          = kAudioFormatLinearPCM,
@@ -184,14 +186,18 @@ static const uint32_t scoreCategory = 1 << 3;
     
     
     SKAction* spawn = [SKAction performSelector:@selector(spawnRests) onTarget:self];
-    SKAction* delay = [SKAction waitForDuration:2.0];
+    SKAction* delay = [SKAction waitForDuration:1.0];
     SKAction* spawnThenDelay = [SKAction sequence:@[spawn, delay]];
     SKAction* spawnThenDelayForever = [SKAction repeatActionForever:spawnThenDelay];
     [self runAction:spawnThenDelayForever];
     
+    restartNode = [self restartMenu];
+    [self addChild:restartNode];
     
 }
-
+//-(void)buttonTouch:(id)sender {
+//    button1.hidden =  !button1.hidden;
+//}
 
 - (void)touchDownAtPoint:(CGPoint)pos {
     SKShapeNode *n = [_spinnyNode copy];
@@ -215,12 +221,17 @@ static const uint32_t scoreCategory = 1 << 3;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
     if( _moving.speed > 0 ) {
         _musicNote.physicsBody.velocity = CGVectorMake(0, 0);
         [_musicNote.physicsBody applyImpulse:CGVectorMake(0, 175)];
     }
-    else if( _canRestart ) {
-        [self resetScene];
+    if ([node.name isEqualToString:@"restartMenu"]) {
+        if( _canRestart ) {
+            [self resetScene];
+        }
     }
     // Run 'Pulse' action from 'Actions.sks'
 //    [_label runAction:[SKAction actionNamed:@"Pulse"] withKey:@"fadeInOut"];
@@ -241,18 +252,20 @@ static const uint32_t scoreCategory = 1 << 3;
     if(_moving.speed == 0){
         return;
     }
-    
-    SKTexture* _restTexture1 = [SKTexture textureWithImageNamed:@"obstacle2"];
+    NSArray* imageList = [NSArray arrayWithObjects: @"obstacle2.png", @"obstacle1.png", @"obstacle3.png", @"obstacle4.png", nil];
+    int randomNumber = rand() % 4;
+    NSString *imageName = [imageList objectAtIndex: randomNumber];
+    SKTexture* _restTexture1 = [SKTexture textureWithImageNamed:imageName];
     _restTexture1.filteringMode = SKTextureFilteringNearest;
     
     CGFloat y = arc4random() % (NSInteger)(550);
     SKNode* restNotes = [SKNode node];
-    restNotes.position = CGPointMake(1000,0);// self.frame.size.width + _blockerTexture1.size.width * 2, 0 );
+    restNotes.position = CGPointMake(-100,0);// self.frame.size.width + _blockerTexture1.size.width * 2, 0 );
     restNotes.zPosition = -10;
     
     SKSpriteNode* note1 = [SKSpriteNode spriteNodeWithTexture:_restTexture1];
     [note1 setScale:.3];
-    note1.position = CGPointMake( 1000 , y );
+    note1.position = CGPointMake( 500 , y );
     note1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:note1.size];
     note1.physicsBody.dynamic = NO;
     note1.physicsBody.categoryBitMask = restNoteCategory;
@@ -362,18 +375,26 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
     _musicNote.physicsBody.collisionBitMask = worldCategory | restNoteCategory;
     _musicNote.speed = 1.0;
     _musicNote.zRotation = 0.0;
-    
+
     // Remove all existing pipes
     [_restNote removeAllChildren];
-    
+
     // Reset _canRestart
     _canRestart = NO;
-    
+
     // Restart animation
     _moving.speed = 1;
-    
+
     _score = 0;
     _scoreLabelNode.text = [NSString stringWithFormat:@"Score: %ld", _score];
-    
+}
+
+- (SKSpriteNode *)restartMenu{
+    SKSpriteNode *restartNode = [SKSpriteNode spriteNodeWithImageNamed:@"restartButton.png"];
+    [restartNode setScale:1.5];
+    restartNode.position = CGPointMake(175,550);
+    restartNode.name = @"restartMenu";//how the node is identified later
+    restartNode.zPosition = 1.0;
+    return restartNode;
 }
 @end
