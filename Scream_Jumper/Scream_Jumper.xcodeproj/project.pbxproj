@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BC435A3E227CBD74001B3B47 /* Rest1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A3D227CBD73001B3B47 /* Rest1.png */; };
 		BC435A40227CBE81001B3B47 /* Rest2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A3F227CBE81001B3B47 /* Rest2.png */; };
+		BC435A4A227CD0DE001B3B47 /* obstacle1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A49227CD0DE001B3B47 /* obstacle1.png */; };
+		BC435A4C227CD0E5001B3B47 /* obstacle2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC435A4B227CD0E5001B3B47 /* obstacle2.png */; };
+		BC435A4E227D80F5001B3B47 /* MenuScene in Resources */ = {isa = PBXBuildFile; fileRef = BC435A4D227D80F5001B3B47 /* MenuScene */; };
+		BC435A50227D812F001B3B47 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BC435A4F227D812F001B3B47 /* MenuScene.m */; };
 		BC537E67227C9E65002624C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537E66227C9E65002624C5 /* AppDelegate.m */; };
 		BC537E69227C9E65002624C5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BC537E68227C9E65002624C5 /* GameScene.sks */; };
 		BC537E6B227C9E65002624C5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = BC537E6A227C9E65002624C5 /* Actions.sks */; };
@@ -20,13 +24,17 @@
 		BC537E7C227C9E67002624C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC537E7B227C9E67002624C5 /* main.m */; };
 		BC537E89227CAE89002624C5 /* musicNote.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E88227CAE89002624C5 /* musicNote.png */; };
 		BC537E8B227CAEA9002624C5 /* musicNote2.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E8A227CAEA8002624C5 /* musicNote2.png */; };
-		BC537E8D227CB085002624C5 /* Ground1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E8C227CB085002624C5 /* Ground1.png */; };
 		BC537E8F227CBA65002624C5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = BC537E8E227CBA65002624C5 /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BC435A3D227CBD73001B3B47 /* Rest1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rest1.png; sourceTree = "<group>"; };
 		BC435A3F227CBE81001B3B47 /* Rest2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rest2.png; sourceTree = "<group>"; };
+		BC435A49227CD0DE001B3B47 /* obstacle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obstacle1.png; sourceTree = "<group>"; };
+		BC435A4B227CD0E5001B3B47 /* obstacle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obstacle2.png; sourceTree = "<group>"; };
+		BC435A4D227D80F5001B3B47 /* MenuScene */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = MenuScene; sourceTree = "<group>"; };
+		BC435A4F227D812F001B3B47 /* MenuScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		BC435A51227D8225001B3B47 /* MenuScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		BC537E62227C9E65002624C5 /* Scream_Jumper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scream_Jumper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC537E65227C9E65002624C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC537E66227C9E65002624C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -43,7 +51,6 @@
 		BC537E7B227C9E67002624C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC537E88227CAE89002624C5 /* musicNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicNote.png; sourceTree = "<group>"; };
 		BC537E8A227CAEA8002624C5 /* musicNote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicNote2.png; sourceTree = "<group>"; };
-		BC537E8C227CB085002624C5 /* Ground1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ground1.png; sourceTree = "<group>"; };
 		BC537E8E227CBA65002624C5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,10 +84,11 @@
 		BC537E64227C9E65002624C5 /* Scream_Jumper */ = {
 			isa = PBXGroup;
 			children = (
+				BC435A4B227CD0E5001B3B47 /* obstacle2.png */,
+				BC435A49227CD0DE001B3B47 /* obstacle1.png */,
 				BC435A3F227CBE81001B3B47 /* Rest2.png */,
 				BC537E8E227CBA65002624C5 /* background.png */,
 				BC435A3D227CBD73001B3B47 /* Rest1.png */,
-				BC537E8C227CB085002624C5 /* Ground1.png */,
 				BC537E88227CAE89002624C5 /* musicNote.png */,
 				BC537E8A227CAEA8002624C5 /* musicNote2.png */,
 				BC537E65227C9E65002624C5 /* AppDelegate.h */,
@@ -96,6 +104,9 @@
 				BC537E77227C9E67002624C5 /* LaunchScreen.storyboard */,
 				BC537E7A227C9E67002624C5 /* Info.plist */,
 				BC537E7B227C9E67002624C5 /* main.m */,
+				BC435A4D227D80F5001B3B47 /* MenuScene */,
+				BC435A4F227D812F001B3B47 /* MenuScene.m */,
+				BC435A51227D8225001B3B47 /* MenuScene.h */,
 			);
 			path = Scream_Jumper;
 			sourceTree = "<group>";
@@ -163,11 +174,13 @@
 				BC537E69227C9E65002624C5 /* GameScene.sks in Resources */,
 				BC537E8B227CAEA9002624C5 /* musicNote2.png in Resources */,
 				BC537E76227C9E67002624C5 /* Assets.xcassets in Resources */,
+				BC435A4E227D80F5001B3B47 /* MenuScene in Resources */,
+				BC435A4A227CD0DE001B3B47 /* obstacle1.png in Resources */,
 				BC537E79227C9E67002624C5 /* LaunchScreen.storyboard in Resources */,
-				BC537E8D227CB085002624C5 /* Ground1.png in Resources */,
 				BC435A3E227CBD74001B3B47 /* Rest1.png in Resources */,
 				BC537E8F227CBA65002624C5 /* background.png in Resources */,
 				BC537E6B227C9E65002624C5 /* Actions.sks in Resources */,
+				BC435A4C227CD0E5001B3B47 /* obstacle2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC537E6E227C9E65002624C5 /* GameScene.m in Sources */,
+				BC435A50227D812F001B3B47 /* MenuScene.m in Sources */,
 				BC537E71227C9E65002624C5 /* GameViewController.m in Sources */,
 				BC537E7C227C9E67002624C5 /* main.m in Sources */,
 				BC537E67227C9E65002624C5 /* AppDelegate.m in Sources */,

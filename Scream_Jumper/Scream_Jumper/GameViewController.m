@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "GameScene.h"
+#import "MenuScene.h"
 
 @implementation GameViewController
 
@@ -16,10 +17,15 @@
 
     // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
     // including entities and graphs.
+    
     GKScene *scene = [GKScene sceneWithFileNamed:@"GameScene"];
+    GKScene *scene1 = [GKScene sceneWithFileNamed:@"MenuScene"];
+
     
     // Get the SKScene from the loaded GKScene
     GameScene *sceneNode = (GameScene *)scene.rootNode;
+    MenuScene *sceneNode1 = (MenuScene *)scene1.rootNode;
+
     
     // Copy gameplay related content over to the scene
     sceneNode.entities = [scene.entities mutableCopy];
