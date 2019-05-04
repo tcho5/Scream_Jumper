@@ -21,7 +21,6 @@
     SKLabelNode* _highScoreLabelNode;
     NSInteger _highScore;
     SKAction* _moveAndRemoveRests;
-
 }
 
 @synthesize audioEngine;
@@ -33,6 +32,41 @@ static const uint32_t scoreCategory = 1 << 3;
 
 - (void)sceneDidLoad {
     // Setup your scene here
+    
+    audioEngine = [[AVAudioEngine alloc] init];
+    AudioStreamBasicDescription audioDescription = {
+        .mFormatID          = kAudioFormatLinearPCM,
+        .mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
+        .mChannelsPerFrame  = 2,
+        .mBytesPerPacket    = sizeof(float),
+        .mFramesPerPacket   = 1,
+        .mBytesPerFrame     = sizeof(float),
+        .mBitsPerChannel    = 8 * sizeof(float),
+        .mSampleRate        = 44100.0
+    };
+    AVAudioFormat *fmt = [[AVAudioFormat alloc] initWithStreamDescription:&audioDescription];
+    
+    AVAudioInputNode *input = [audioEngine inputNode];
+    [input installTapOnBus:0 bufferSize:1024 format:fmt block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
+        float v = 0;
+        const AudioBufferList *bufferList = [buffer audioBufferList];
+        float *rawData = (float *) bufferList->mBuffers[0].mData;
+        for (int i = 0; i < [buffer frameLength]; ++i)
+        {
+            v += fabsf(rawData[i]);
+        }
+        NSLog(@"V yeet: %f\n", v);
+        if( _moving.speed > 0) {
+            if(v > .5){
+            _musicNote.physicsBody.velocity = CGVectorMake(0, 0);
+            [_musicNote.physicsBody applyImpulse:CGVectorMake(0, 175)];
+            }
+        }
+    }];
+    
+    NSError *err;
+    [audioEngine startAndReturnError:&err];
+    
     self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 );
     self.physicsWorld.contactDelegate = self;
     self.backgroundColor = UIColor.whiteColor;
@@ -65,34 +99,6 @@ static const uint32_t scoreCategory = 1 << 3;
     
     //[_moving addChild:_restNote];
     
-    audioEngine = [[AVAudioEngine alloc] init];
-    AudioStreamBasicDescription audioDescription = {
-        .mFormatID          = kAudioFormatLinearPCM,
-        .mFormatFlags       = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
-        .mChannelsPerFrame  = 2,
-        .mBytesPerPacket    = sizeof(float),
-        .mFramesPerPacket   = 1,
-        .mBytesPerFrame     = sizeof(float),
-        .mBitsPerChannel    = 8 * sizeof(float),
-        .mSampleRate        = 44100.0
-    };
-    AVAudioFormat *fmt = [[AVAudioFormat alloc] initWithStreamDescription:&audioDescription];
-    
-    AVAudioInputNode *input = [audioEngine inputNode];
-    [input installTapOnBus:0 bufferSize:1024 format:fmt block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
-        float v = 0;
-        const AudioBufferList *bufferList = [buffer audioBufferList];
-        float *rawData = (float *) bufferList->mBuffers[0].mData;
-        for (int i = 0; i < [buffer frameLength]; ++i)
-        {
-            v += fabsf(rawData[i]);
-        }
-        NSLog(@"V: %f\n", v);
-    }];
-    
-    NSError *err;
-    [audioEngine startAndReturnError:&err];
-    
     
     //Create Ground
     SKTexture* groundTexture = [SKTexture textureWithImageNamed:@"Rest2"];
@@ -110,7 +116,7 @@ static const uint32_t scoreCategory = 1 << 3;
         //[_moving addChild:sprite];
     }
     
-    // Create skyline
+    // Create background
     SKTexture* skylineTexture = [SKTexture textureWithImageNamed:@"background"];
     skylineTexture.filteringMode = SKTextureFilteringNearest;
     
@@ -241,12 +247,12 @@ static const uint32_t scoreCategory = 1 << 3;
     
     CGFloat y = arc4random() % (NSInteger)(550);
     SKNode* restNotes = [SKNode node];
-    restNotes.position = CGPointMake(400,0);// self.frame.size.width + _blockerTexture1.size.width * 2, 0 );
+    restNotes.position = CGPointMake(1000,0);// self.frame.size.width + _blockerTexture1.size.width * 2, 0 );
     restNotes.zPosition = -10;
     
     SKSpriteNode* note1 = [SKSpriteNode spriteNodeWithTexture:_restTexture1];
     [note1 setScale:.3];
-    note1.position = CGPointMake( -100 , y );
+    note1.position = CGPointMake( 1000 , y );
     note1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:note1.size];
     note1.physicsBody.dynamic = NO;
     note1.physicsBody.categoryBitMask = restNoteCategory;
