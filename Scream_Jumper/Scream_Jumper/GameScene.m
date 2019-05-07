@@ -23,6 +23,7 @@
     NSInteger _highScore;
     SKAction* _moveAndRemoveRests;
     SKNode* restartNode;
+    SKLabelNode* gameLabel;
 }
 
 @synthesize audioEngine;
@@ -35,6 +36,9 @@ static const uint32_t scoreCategory = 1 << 3;
 
 - (void)sceneDidLoad {
     // Setup your scene here
+    gameLabel = [self gameLabelSetUp];
+    [self addChild:gameLabel];
+    
     audioEngine = [[AVAudioEngine alloc] init];
     AudioStreamBasicDescription audioDescription = {
         .mFormatID          = kAudioFormatLinearPCM,
@@ -59,7 +63,7 @@ static const uint32_t scoreCategory = 1 << 3;
         }
         NSLog(@"V yeet: %f\n", v);
         if( _moving.speed > 0) {
-            if(v > .5){
+            if(v > 500){
             _musicNote.physicsBody.velocity = CGVectorMake(0, 0);
             [_musicNote.physicsBody applyImpulse:CGVectorMake(0, 175)];
             }
@@ -186,7 +190,7 @@ static const uint32_t scoreCategory = 1 << 3;
     
     
     SKAction* spawn = [SKAction performSelector:@selector(spawnRests) onTarget:self];
-    SKAction* delay = [SKAction waitForDuration:1.0];
+    SKAction* delay = [SKAction waitForDuration:2.0];
     SKAction* spawnThenDelay = [SKAction sequence:@[spawn, delay]];
     SKAction* spawnThenDelayForever = [SKAction repeatActionForever:spawnThenDelay];
     [self runAction:spawnThenDelayForever];
@@ -308,9 +312,10 @@ static const uint32_t scoreCategory = 1 << 3;
         [self removeActionForKey:@"flash"];
         [self runAction:[SKAction sequence:@[[SKAction repeatAction:[SKAction sequence:@[[SKAction runBlock:^{
             self.backgroundColor = [SKColor redColor];
-        }], [SKAction waitForDuration:0.05], [SKAction runBlock:^{
+        }], [SKAction waitForDuration:0.10], [SKAction runBlock:^{
             self.backgroundColor = [SKColor whiteColor];
-        }], [SKAction waitForDuration:0.10]]] count:4]]] withKey:@"flash"];
+        }], [SKAction waitForDuration:0.10]]] count:8]]] withKey:@"flash"];
+        gameLabel.text = @"Game Over!";
         //[NSThread sleepForTimeInterval: 2.0f];
     }
     
@@ -387,6 +392,8 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
 
     _score = 0;
     _scoreLabelNode.text = [NSString stringWithFormat:@"Score: %ld", _score];
+    
+    gameLabel.text = @"Yell to move notes higher!";
 }
 
 - (SKSpriteNode *)restartMenu{
@@ -397,4 +404,15 @@ CGFloat clamp(CGFloat min, CGFloat max, CGFloat value) {
     restartNode.zPosition = 1.0;
     return restartNode;
 }
+
+- (SKLabelNode *)gameLabelSetUp{
+    SKLabelNode* gameLabel = [SKLabelNode node];
+    gameLabel.text = @"Yell to move notes higher!";
+    gameLabel.fontSize = 30;
+    gameLabel.name = @"gameLabel";
+    gameLabel.position = CGPointMake(0, 175);
+    gameLabel.fontColor = [UIColor blackColor];
+    return gameLabel;
+}
+
 @end
