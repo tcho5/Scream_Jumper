@@ -1,13 +1,13 @@
-# Scream_Jumper
+# Rest Jumper
 # CS441 Assignment 8
 # -----------------------------------------------------------
 # Description:
-This will be an IOS Game with similar concepts as Flappy Bird.  
-Instead of tapping on the screen to jump, you have to scream. The louder you scream, the higher you jump.  
+This is an IOS Game with similar concepts as Flappy Bird BUT...
+Instead of tapping on the screen to jump, you have to YELL. Like... REALLY YELL. The louder you scream, the higher you jump.  
 The goal of this game is to get past the obstacles using just your voice and eye coordination.  
-# Features to be included:
-1) Fun user interface for game platform  
-2) Sound effects for jumping and dying  
-3) Score text that keeps track of scores  
-4) Different difficulties?  
-5) Ability to change the objects that jumps (Collectables)
+
+# Features included:
+1) Fun Game User Interface 
+2) YELL to jump gameplay
+3) Score text that keeps track of scores / High Scores
+4) 

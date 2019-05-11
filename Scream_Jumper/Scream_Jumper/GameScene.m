@@ -63,7 +63,7 @@ static const uint32_t scoreCategory = 1 << 3;
         }
         NSLog(@"V yeet: %f\n", v);
         if( _moving.speed > 0) {
-            if(v > 500){
+            if(v > 150){
             _musicNote.physicsBody.velocity = CGVectorMake(0, 0);
             [_musicNote.physicsBody applyImpulse:CGVectorMake(0, 175)];
             }
@@ -188,9 +188,16 @@ static const uint32_t scoreCategory = 1 << 3;
     dummy.physicsBody.categoryBitMask = worldCategory;
     [self addChild:dummy];
     
+    SKNode* dummy1 = [SKNode node];
+    dummy1.position = CGPointMake(0, 800);
+    dummy1.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(self.frame.size.width, 200)];
+    dummy1.physicsBody.dynamic = NO;
+    dummy1.physicsBody.categoryBitMask = worldCategory;
+    [self addChild:dummy1];
+    
     
     SKAction* spawn = [SKAction performSelector:@selector(spawnRests) onTarget:self];
-    SKAction* delay = [SKAction waitForDuration:2.0];
+    SKAction* delay = [SKAction waitForDuration:1.0];
     SKAction* spawnThenDelay = [SKAction sequence:@[spawn, delay]];
     SKAction* spawnThenDelayForever = [SKAction repeatActionForever:spawnThenDelay];
     [self runAction:spawnThenDelayForever];
@@ -314,7 +321,7 @@ static const uint32_t scoreCategory = 1 << 3;
             self.backgroundColor = [SKColor redColor];
         }], [SKAction waitForDuration:0.10], [SKAction runBlock:^{
             self.backgroundColor = [SKColor whiteColor];
-        }], [SKAction waitForDuration:0.10]]] count:8]]] withKey:@"flash"];
+        }], [SKAction waitForDuration:0.10]]] count:5]]] withKey:@"flash"];
         gameLabel.text = @"Game Over!";
         //[NSThread sleepForTimeInterval: 2.0f];
     }
